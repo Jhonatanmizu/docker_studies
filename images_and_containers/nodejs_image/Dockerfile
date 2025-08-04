@@ -1,15 +1,19 @@
 FROM node:alpine
 
 
-# Copy everything to the image
-## The first dot means copy all in the current dir and the next dot is the destiny dir
-COPY . ./app
 
 # Define working directory to the destiny dir
 WORKDIR /app
 
+# Copy package.json and package-lock.json to the image
+COPY package*.json ./
+
 # Install the deps
 RUN npm install 
+
+
+# Copy everything to the image
+COPY . ./app
 
 # Expose the port to our localhost
 EXPOSE 80
